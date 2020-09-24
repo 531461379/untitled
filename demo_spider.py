@@ -39,3 +39,6 @@ class Enteromm():
 
 loginino = Enteromm("https://demo.talk-cloud.net/340340104/10756/0/2")
 loginino.room_url()
+
+
+print("更新1")
