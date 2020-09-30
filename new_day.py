@@ -18,7 +18,7 @@ class Mysqlserch(object):
                 user = "root",
                 password = "123456",
                 port = 3306,
-                db = "girls",
+                db = "myemployees",
                 charset = "utf8"
             )
         except pymysql.Error as e:
@@ -36,30 +36,31 @@ class Mysqlserch(object):
         查询一条数据
         :return:
         '''
-        sql = 'SELECT `name` FROM beauty where name = "周冬雨";'
+        sql_one = 'SELECT `name` FROM beauty where name = "周冬雨";'
         cursor = self.conn.cursor()
-        cursor.execute(sql)
-        rest = dict(zip([k[0] for k in cursor.description],cursor.fetchone()))
+        cursor.execute(sql_one)
+        rest_one = dict(zip([k[0] for k in cursor.description],cursor.fetchone()))
         cursor.close()
         self.close_conn()
-        return rest
+        return rest_one
 
     def get_all(self):
         '''
         查询多条
         :return:
         '''
-        sql = "SELECT * FROM beauty;"
+        sql_all = "SELECT * FROM employees;"
         cursor = self.conn.cursor()
-        cursor.execute(sql)
-        rest = [dict(zip([k[0] for k in cursor.description],row)) for row in cursor.fetchall()]
+        cursor.execute(sql_all)
+        rest_all = [dict(zip([k[0] for k in cursor.description],row)) for row in cursor.fetchall()]
         cursor.close()
         self.close_conn()
-        return rest
+        return rest_all
 
 def main():
     obj = Mysqlserch()
     # rest1 = obj.get_one()
+    # print(rest1)
     rest = obj.get_all()
     for item in rest:
         print(item)
