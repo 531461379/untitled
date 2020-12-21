@@ -17,7 +17,7 @@ class Entry():
     def __init__(self,key):
         self.url = "http://global.talk-cloud.net/WebAPI/entry"
         self.key = "l97lLyiwpjB15d6u"   #authkey值
-        self.serial = "1185769721"    #房间号
+        self.serial = "928082399"    #房间号
         self.usertype = "0"    #用户类型
         self.domain = "test"   #企业域名
         self.randoms = random.randint(1000, 9999)
@@ -50,7 +50,7 @@ class Entry():
     def res_get(self):
         data = {"domain":self.domain, "serial":self.serial,
                      "username": "entry_serial", "usertype":self.usertype,
-                     "pid":self.randoms,"ts":self.times, "auth":self.md5(),"userpassword":self.encrypt("2222").decode(),"stuJumpUrl":"https://www.baidu.com/"}
+                     "pid":self.randoms,"ts":self.times, "auth":self.md5(),"userpassword":self.encrypt("1111").decode(),"stuJumpUrl":"https://www.baidu.com/"}
         res = requests.get(self.url,data)
         print(res.url)
 

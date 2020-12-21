@@ -1,15 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time : 2020/9/23 16:01
+# @Time : 2020/12/18 14:26
 
-# ！/usr/bin/env python
-# _*_ coding:utf-8 _*_
-# @Time:2020/8/28 16:24
 
 from selenium import webdriver
 import os
 import time
 import faker
+import pyautogui
 from pynput.mouse import Button, Controller
 fake = faker.Faker()
 
@@ -33,28 +31,23 @@ class Enteromm():
         self.url = url
 
 
-    def close(self):
-        self.driver.quit()
-
     def room_url(self):
         self.driver.get(self.url)
         self.driver.find_element_by_name("nickname").send_keys(fake.name())
-        self.driver.find_element_by_name("roompwd").send_keys("1")
-        self.driver.find_element_by_id("submit_btn").click()
+        self.driver.find_element_by_xpath('//*[@id="form_signin"]/div/div[2]/p').click()
         time.sleep(5)
         self.driver.find_element_by_id("start-detection").click()
-        self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[2]/div[4]/button[2]').click() #视频检测
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[2]/div[5]/button[2]').click() #视频检测
         self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[3]/div[4]/button[2]').click() #扬声器检测
-        self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[4]/div[6]/button[2]').click()
+        self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[4]/div[7]/button[2]').click()
         self.driver.find_element_by_xpath('//*[@id="main_detection_device"]/div/div[6]/div/button[2]').click()
-
-    def to_classroom(self, x=311, y=198):
-        mouse = Controller()
-        mouse.position = (x, y)
-        mouse.click(button=Button.left)
-        time.sleep(3)
-
-loginino = Enteromm("https://global.talk-cloud.net/1364152026/10032/1/0")
-loginino.room_url()
-
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="all_root"]/body/div[5]/div/div[3]/div[2]/div/div/div[3]/button').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="header_container"]/article[2]/div[1]/div[3]/button/span').click()
+        time.sleep(2)
+        self.driver.find_element_by_xpath('//*[@id="chatbox"]/div[2]/div[2]/div/div').send_keys(fake.company())
+        pyautogui.press('enter')
+        time.sleep(5)
 
